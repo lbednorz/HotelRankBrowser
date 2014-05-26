@@ -7,23 +7,38 @@
 package pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser;
 
 import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.*;
-
+import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model.*;
 /**
  *
  * @author Leszek Nednorz
  */
 public abstract class HotelPageRankReader {
     
-   protected HotelDescriptionBrowser hotelDescriptionBrowserEngine;
+   protected HotelDescriptionBrowser hotelDescriptionBrowser;
    protected HotelDetailedRankReader hotelDetailedRankReader;
    protected HotelMainRankReader hotelMainRankReader;
    protected HotelPageSearcher hotelPageSearcher;
    
+   private String engineName;
    
-   public boolean checkConfig(){
-       return true;
+  
+   
+   public HotelInfo getInfo(String name, String city, String country){
+       
+       HotelInfo info  = new HotelInfo();
+       info.setEngineName(engineName);
+       info.setPageUrl(hotelPageSearcher.searchPage(name, city, country));
+       if (info.getPageUrl() == null){
+           return null;
+       }
+       info.setDescription(hotelDescriptionBrowser.loadDescription(info.getPageUrl()));
+       info.setMainRank(hotelMainRankReader.readMainRank(info.getPageUrl()));
+       info.setDetailedRank(hotelDetailedRankReader.readDetailedRank(info.getPageUrl()));
+       
+       return info;
+       
+       
    }
-   
  
     
 }

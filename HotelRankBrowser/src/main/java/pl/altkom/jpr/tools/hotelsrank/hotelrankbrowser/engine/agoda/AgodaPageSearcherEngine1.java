@@ -11,7 +11,7 @@ import org.w3c.dom.Document;
 
 import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.HotelPageSearcher;
 
-public final class AgodaPageSearcher implements HotelPageSearcher {
+public final class AgodaPageSearcherEngine1 implements HotelPageSearcher {
 
 	private static final String COUNTRY_XML = "country.xml";
 	private static final String URL = "http://www.agoda.com/pl-pl/%s/hotel/%s-%s.html";
@@ -33,7 +33,7 @@ public final class AgodaPageSearcher implements HotelPageSearcher {
 
 	private String prepareCountry(String country) {
 		try {
-			InputStream resourceAsStream = AgodaPageSearcher.class
+			InputStream resourceAsStream = AgodaPageSearcherEngine1.class
 					.getResourceAsStream(COUNTRY_XML);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();

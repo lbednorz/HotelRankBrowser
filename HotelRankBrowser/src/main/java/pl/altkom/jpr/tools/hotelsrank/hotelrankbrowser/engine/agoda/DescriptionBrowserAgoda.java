@@ -23,7 +23,7 @@ public class DescriptionBrowserAgoda implements HotelDescriptionBrowser {
 				doc = Jsoup.connect(pageUrl).userAgent("Mozilla").get();
 			}
 			Elements links = doc
-					.select("#ctl00_ctl00_MainContent_ContentMain_mainHotelPhotoHD_lblTotalScore");
+					.select("#ctl00_ctl00_MainContent_ContentMain_HotelInformation1_pnlDescription");
 
 			for (Element link : links) {
 				return link.text();

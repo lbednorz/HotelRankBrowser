@@ -5,7 +5,7 @@ package pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model;
  * @author Leszek Bednorz
  */
 public class DetailedRank {
-    
+
     private float food;
     private float loacalization;
     private float quality;
@@ -60,6 +60,10 @@ public class DetailedRank {
     public void setWorthPrice(float worthPrice) {
         this.worthPrice = worthPrice;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "DetailedRank{" + "food=" + food + ", loacalization=" + loacalization + ", quality=" + quality + ", roomComfort=" + roomComfort + ", workers=" + workers + ", worthPrice=" + worthPrice + '}';
+    }
+
 }

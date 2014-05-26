@@ -21,19 +21,17 @@ public class HTMLParserExample2 {
     public static void main(String[] args) {
 
         Document doc;
-       
+
         try {
 
             // need http protocol
             doc = Jsoup.connect("http://www.agoda.com/pl-pl/melia-bali-indonesia/hotel/bali-id.html").userAgent("Mozilla").get();
+           
+            
             String title = doc.title();
             System.out.println("title : " + title);
 
-           
-
-             
             // get page title
-
             // get all links
             Elements links = doc.select("#ctl00_ctl00_MainContent_ContentMain_mainHotelPhotoHD_lblTotalScore");
             for (Element link : links) {
