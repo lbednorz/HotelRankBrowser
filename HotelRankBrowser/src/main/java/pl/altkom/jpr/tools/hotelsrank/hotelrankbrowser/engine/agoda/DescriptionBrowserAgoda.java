@@ -4,42 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.HotelDescriptionBrowser;
+import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.template.HotelDescriptionBrowserTemplate;
 
 /**
  *
  * @author Marcin Lis
  *
  */
-public class DescriptionBrowserAgoda implements HotelDescriptionBrowser {
+public class DescriptionBrowserAgoda extends HotelDescriptionBrowserTemplate {
 
-    private Document doc;
-    private String loadedUrl = "";
-
-    public String loadDescription(String pageUrl) {
-
-        try {
-            if ((doc == null) || (!loadedUrl.equals(pageUrl))) {
-                doc = Jsoup.connect(pageUrl).userAgent("Mozilla").get();
-                loadedUrl = pageUrl;
-            }
-
-            Elements links = doc
-                    .select("#ctl00_ctl00_MainContent_ContentMain_HotelInformation1_pnlDescription");
-
-            for (Element link : links) {
-                return link.text();
-            }
-            return null;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+    public Elements parseDescription(Document doc) {
+		Elements links = doc
+		        .select("#ctl00_ctl00_MainContent_ContentMain_HotelInformation1_pnlDescription");
+		return links;
+	}
 
     public void setDocument(Document doc) {
         this.doc = doc;
