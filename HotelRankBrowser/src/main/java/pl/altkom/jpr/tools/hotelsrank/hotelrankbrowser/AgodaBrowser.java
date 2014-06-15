@@ -8,7 +8,8 @@ import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.agoda.*;
  */
 public class AgodaBrowser extends HotelPageRankReader{
 
-    public AgodaBrowser(){
+    public AgodaBrowser(){        
+        this.engineName = "Agoda";
         this.hotelPageSearcher = new AgodaPageSearcherEngine2();
         this.hotelDescriptionBrowser = new DescriptionBrowserAgoda();
         this.hotelMainRankReader = new MainRankReaderAgoda();

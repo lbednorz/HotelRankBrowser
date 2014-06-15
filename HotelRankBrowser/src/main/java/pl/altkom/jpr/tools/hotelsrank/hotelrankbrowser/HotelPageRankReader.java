@@ -19,7 +19,7 @@ public abstract class HotelPageRankReader {
    protected HotelMainRankReader hotelMainRankReader;
    protected HotelPageSearcher hotelPageSearcher;
    
-   private String engineName;
+   protected String engineName;
    
   
    
@@ -32,6 +32,8 @@ public abstract class HotelPageRankReader {
            return null;
        }
        info.setDescription(hotelDescriptionBrowser.loadDescription(info.getPageUrl()));
+       info.setFacilites(hotelDescriptionBrowser.loadFacilites(info.getPageUrl()));
+       info.setUsefoulInfo(hotelDescriptionBrowser.loadUsefoulInfo(info.getPageUrl()));
        info.setMainRank(hotelMainRankReader.readMainRank(info.getPageUrl()));
        info.setDetailedRank(hotelDetailedRankReader.readDetailedRank(info.getPageUrl()));
        

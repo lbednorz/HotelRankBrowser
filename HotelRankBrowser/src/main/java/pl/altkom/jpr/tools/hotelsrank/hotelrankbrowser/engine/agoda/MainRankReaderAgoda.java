@@ -15,12 +15,14 @@ import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.HotelMainRankReade
 public class MainRankReaderAgoda implements HotelMainRankReader {
 
     private Document doc;
+    private String loadedUrl = "";
 
     public float readMainRank(String pageUrl) {
 
         try {
-            if (doc == null) {
+           if ((doc == null) || (!loadedUrl.equals(pageUrl))) {
                 doc = Jsoup.connect(pageUrl).userAgent("Mozilla").get();
+                loadedUrl = pageUrl;
             }
             Elements links = doc
                     .select("#ctl00_ctl00_MainContent_ContentMain_mainHotelPhotoHD_lblTotalScore");

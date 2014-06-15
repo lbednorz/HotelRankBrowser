@@ -1,6 +1,6 @@
 package pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine;
 
-import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model.DetailedRank;
+import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model.DetailedRankAndInfo;
 
 /**
  *
@@ -8,5 +8,5 @@ import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model.DetailedRank
  */
 public interface HotelDetailedRankReader extends PriorLoadedDoc {
 
-    public DetailedRank readDetailedRank(String hotelUrl);
+    public DetailedRankAndInfo readDetailedRank(String hotelUrl);
 }

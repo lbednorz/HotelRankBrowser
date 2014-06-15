@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.HotelDetailedRankReader;
-import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model.DetailedRank;
+import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model.DetailedRankAndInfo;
 
 /**
  *
@@ -16,15 +16,17 @@ import pl.altkom.jpr.tools.hotelsrank.hotelrankbrowser.engine.model.DetailedRank
 public class DetailedRankReaderAgoda implements HotelDetailedRankReader {
 
     private Document doc;
+    private String loadedUrl = "";
 
-    public DetailedRank readDetailedRank(String hotelUrl) {
+    public DetailedRankAndInfo readDetailedRank(String hotelUrl) {
 
         try {
-            if (doc == null) {
+            if ((doc == null) || (!loadedUrl.equals(hotelUrl))) {
                 doc = Jsoup.connect(hotelUrl).userAgent("Mozilla").get();
+                loadedUrl = hotelUrl;
             }
             Elements values = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblFood");
-            DetailedRank rank = new DetailedRank();
+            DetailedRankAndInfo rank = new DetailedRankAndInfo();
 
             for (Element val : values) {
 
@@ -60,6 +62,49 @@ public class DetailedRankReaderAgoda implements HotelDetailedRankReader {
 
                 rank.setQuality(toFloat(val.text()));
             }
+            Elements airportsInfo = doc.select("#ctl00_ctl00_MainContent_AlternateHotelLis_BulletHotelDescriptionHD_pnlDistanceToAirport");
+            for (Element val : airportsInfo) {
+                if (val.text() != null) {
+                    rank.setDistanceToAirportInfo(val.text().replace("Odległość do lotniska:", ""));
+                }
+
+            }
+            Elements likedBy = doc.select("#ctl00_ctl00_MainContent_AlternateHotelLis_BulletHotelDescriptionHD_pnlAreaRecommended");
+            for (Element val2 : likedBy.select("li")) {
+                if (val2.text() != null) {
+                    rank.getAreaRecommended().add(val2.text());
+                }
+            }
+
+            Elements values6 = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblAllReviews2521");
+            for (Element val : values6) {
+                rank.setReviewCountAll(toInt(val.text()));
+            }
+            Elements values7 = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblBusinessReviews2521");
+            for (Element val : values7) {
+                rank.setReviewCountBusinessTravelers(toInt(val.text()));
+            }
+            Elements values8 = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblFamilyYoungReviews2521");
+            for (Element val : values8) {
+                rank.setReviewCountFamiliesWithYountChildrens(toInt(val.text()));
+            }
+            Elements values9 = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblFamilyOlderReviews2521");
+            for (Element val : values9) {
+                rank.setReviewCOuntFamiliesWithOlderChildrens(toInt(val.text()));
+            }
+            Elements values10 = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblCouplesReviews2521");
+            for (Element val : values10) {
+                rank.setReviewCountCouples(toInt(val.text()));
+            }
+            Elements values11 = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblOthersReviews2521");
+            for (Element val : values11) {
+                rank.setReviewCountGroups(toInt(val.text()));
+            }
+            Elements values12 = doc.select("#ctl00_ctl00_MainContent_ContentMain_HotelReview1_lblSoloReviews2521");
+            for (Element val : values12) {
+                rank.setReviewCountSolorTravelers(toInt(val.text()));
+            }
+
             return rank;
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,9 +116,16 @@ public class DetailedRankReaderAgoda implements HotelDetailedRankReader {
         this.doc = doc;
 
     }
-    private float toFloat(String  str) throws java.lang.NumberFormatException{
-           String number = str.replace(",", ".");
-           return Float.parseFloat(number);
+
+    private float toFloat(String str) throws java.lang.NumberFormatException {
+        String number = str.replace(",", ".");
+        return Float.parseFloat(number);
+    }
+
+    private int toInt(String str) throws java.lang.NumberFormatException {
+        str = str.replace("(", "");
+        str = str.replace(")", "");
+        return Integer.parseInt(str);
     }
 
 }
