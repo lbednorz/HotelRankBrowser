@@ -1,4 +1,4 @@
-[jQuery](https://jquery.com/) — New Wave JavaScript
+﻿[jQuery](https://jquery.com/) — New Wave JavaScript
 ==================================================
 
 Contribution Guides
@@ -373,3 +373,13 @@ Questions?
 
 If you have any questions, please feel free to ask on the
 [Developing jQuery Core forum](https://forum.jquery.com/developing-jquery-core) or in #jquery on irc.freenode.net.
+=======
+HotelRankBrowser
+================
+
+Java API for browsing hotels ranking points from popular hotels review pages.
+
+Mamy tutaj śmieszka widzę:
+
+ to ja ;P
+>>>>>>> 7c565ad11920c5c9755b507bc64a7a1ad7c30f6c
