@@ -3,7 +3,5 @@ HotelRankBrowser
 
 Java API for browsing hotels ranking points from popular hotels review pages.
 
-
-heheszki
-=======
+xyz
 heheszki 2.0
