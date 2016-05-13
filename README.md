@@ -379,7 +379,15 @@ HotelRankBrowser
 
 Java API for browsing hotels ranking points from popular hotels review pages.
 
+<<<<<<< HEAD
 Mamy tutaj śmieszka widzę:
 
+=======
+<<<<<<< HEAD
+xyz
+heheszki 2.0
+as
+=======
+>>>>>>> f2b3b00c62199a30f77eb9c855bd4c40271b3d2e
  to ja ;P
 >>>>>>> 7c565ad11920c5c9755b507bc64a7a1ad7c30f6c
